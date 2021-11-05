@@ -33,7 +33,6 @@ class Item:
         return self.price
 
 
-
 item1 = Item("Phone", 4000, 12)  # creating an instance of a class
 next_item = Item("Laptop", 2000, 12)
 
@@ -71,3 +70,4 @@ for commodity in Item.all_commodities:
 # while using the magic method
 for commodity in Item.all_commodities:
     print(Item.all_commodities)
+    
