@@ -1,7 +1,8 @@
 """
-constructor in oop
+class and static method
 """
 
+import csv
 
 class Item:
     # creating a class attribute
@@ -32,42 +33,36 @@ class Item:
             self.price = self.price * self.pay_rate
         return self.price
 
+    # creating class method
+    @classmethod
+    def instance_from_csv(cls):
+        with open("item.csv", "r") as data:
+            reader = csv.DictReader(data)
+            new_list = list(reader)
 
-item1 = Item("Phone", 4000, 12)  # creating an instance of a class
-next_item = Item("Laptop", 2000, 12)
+        for values in new_list:
+            print(values)
 
-print(item1.calculate_total_price())
-print(next_item.calculate_total_price())
-# using the magic attribute to identify all the attributes in a class
-print()
-print(Item.__dict__)
-print(item1.__dict__)
-print(next_item.__dict__)
-print()
-print(Item.pay_rate)
+            # creating instances
+            Item(
+                name=values.get('name'),
+                price=float(values.get('price')),
+                quantity=int(values.get('quantity'))
+            )
 
-# printing the price after discount
-print(item1.discount_pay())
-next_item.pay_rate = 0.75
-print(next_item.discount_pay())
+    # creating a static method
+    @staticmethod
+    def look_integer(num):  # checking for integer
+        if isinstance(num, float):
+            return num.is_integer()
+        elif isinstance(num, int):
+            return True
+        else:
+            return False
 
-# if any case of many items
 
-commodity1 = Item("cables", 35, 3)
-commodity2 = Item("radio", 400, 9)
-commodity3 = Item("switch", 90, 2)
-commodity4 = Item("motor", 25, 5)
-commodity5 = Item("engine", 489, 3)
+print(Item.look_integer(7.5))
+Item.instance_from_csv()
+print(Item.all_commodities)
 
-# instead of magic method
-for commodity in Item.all_commodities:
-    print(commodity.name)
-    print()
-    print(commodity.price)
-    print()
-    print(commodity.quantity)
 
-# while using the magic method
-for commodity in Item.all_commodities:
-    print(Item.all_commodities)
-    
