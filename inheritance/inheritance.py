@@ -1,9 +1,8 @@
 """
-class and static method
+inheritance
 """
 
 import csv
-
 
 class Item:
     # creating a class attribute
@@ -62,8 +61,23 @@ class Item:
             return False
 
 
-print(Item.look_integer(7.5))
-Item.instance_from_csv()
-print(Item.all_commodities)
+class Phone(Item):
+    # creating a constructor and creating attributes inside a constructor
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.name}, {self.price}, {self.quantity}')"
 
+    # converting attributes into appropriate datatype
+    def __init__(self, name: str, price: int, quantity: int = 0, broken_phone = 0):
+        # call the super function
+        super().__init__(
+            name, price, quantity
+        )
+        # run validation of the received arguments
+        assert broken_phone >= 0, f"{broken_phone} given is not equal or greater than zero"
+
+
+phone1 = Phone("Tecno", 49, 5, 1)
+phone2 = Phone("infinix", 100, 3, 3)
+
+print(Phone.all_commodities)
 
